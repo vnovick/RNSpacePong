@@ -8,7 +8,11 @@ import {
 export default function BackgroundScreen({ img, children, style }){
   return (
     <View style={[styles.container, style]}>
-      <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }/>
+      <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }>
+      <View />
+      <View />
+      <View />
+      </Image>
       <Image source={img || require('../../assets/imgs/player.png')} style={[styles.player]} />
     </View>
   );
@@ -26,6 +30,7 @@ const styles = StyleSheet.create({
   shield: {
     width: 50,
     height: 5,
-    marginBottom: 5
+    marginBottom: 5,
+    flexDirection:'row'
   }
 });

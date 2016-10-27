@@ -10,6 +10,12 @@ export default class GameManager {
     this.startGame = action(this.startGame);
   }
 
+  ballHit(hitVal,direction){}
+
+  onEndHit(direction){}
+
+  onSideHit(){}
+  
   startGame(){
     this.levelCount = 1;
   }

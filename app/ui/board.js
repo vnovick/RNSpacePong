@@ -14,6 +14,7 @@ import {
   Dimensions
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
+import Ball from './widgets/ball'
 import PlayerPanel from './widgets/playerPanel';
 import { Loop, World, Stage } from 'react-game-kit/native';
 import {observer} from 'mobx-react/native';
@@ -38,7 +39,7 @@ class Board extends Component {
               <Stage width={this.dimensions.width} height={this.dimensions.height - 50}>
                 <World height={this.dimensions.height - 200}>
                   <View width={this.dimensions.width} height={this.dimensions.height - 150}>
-                    <Text style={{ position: 'absolute', bottom: 0, color: 'red'}}>the Ball</Text>
+                    <Ball />
                   </View>
                   <PlayerPanel style={{ width: this.dimensions.width}}/>
                 </World>
