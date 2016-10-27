@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
 import PlayerPanel from './widgets/playerPanel';
-import World from './widgets/world';
+import { Loop, World, Stage } from 'react-game-kit/native';
 import {observer} from 'mobx-react/native';
 
 class Board extends Component {
@@ -33,8 +33,13 @@ class Board extends Component {
               {` Welcome to Level ${levelCount} `}
             </Text>
           </View>
-          <World/>
-          <PlayerPanel style={ styles.playerPanel }/>
+          <Loop>
+            <Stage>
+              <World>
+                <PlayerPanel style={ styles.playerPanel }/>
+              </World>
+            </Stage>
+          </Loop>
         </View>
       </BackgroundScreen>
     );

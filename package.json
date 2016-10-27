@@ -10,6 +10,7 @@
     "mobx": "^2.6.0",
     "mobx-react": "^3.5.8",
     "react": "15.3.2",
+    "react-game-kit": "0.0.1",
     "react-native": "0.36.0"
   },
   "jest": {
