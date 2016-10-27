@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
+import { Body } from 'react-game-kit';
 
 export default function BackgroundScreen({ img, children, style }){
   return (

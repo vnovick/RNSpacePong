@@ -40,7 +40,7 @@ class Board extends Component {
                   <View width={this.dimensions.width} height={this.dimensions.height - 150}>
                     <Text style={{ position: 'absolute', bottom: 0, color: 'red'}}>the Ball</Text>
                   </View>
-                  <PlayerPanel style={{ width: this.dimensions.width}}/>
+                  <PlayerPanel style={{ width: this.dimensions.width}} {...this.props} />
                 </World>
               </Stage>
           </Loop>

@@ -5,8 +5,12 @@ import {
   Image,
   PanResponder
 } from 'react-native';
+
+import { observer } from 'mobx-react/native';
+
 import Player from './player'
 
+@observer(['gameManager'])
 export default class PlayerPanel extends Component {
   componentWillMount() {
     this._panResponder = PanResponder.create({
@@ -27,15 +31,15 @@ export default class PlayerPanel extends Component {
 
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
-        const newX = this._previousLeft + gestureState.dx;
+        let newX = this._previousLeft + gestureState.dx;
         const { width: maxWidth } = this.props.style;
-        this._x =
+        newX =
           this._previousLeft + gestureState.dx < 0 ?
             0 :
             newX > maxWidth ?
               maxWidth :
                 newX;
-        this.forceUpdate();
+        this.props.gameManager.movePlayer(newX)
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
@@ -57,12 +61,12 @@ export default class PlayerPanel extends Component {
   }
 
   _previousLeft = 0;
-  _x = 0;
 
   render(){
+    const { player: { pane: { x } } } = this.props.gameManager;
     return (
       <View style={[styles.container, this.props.style]} { ...this._panResponder.panHandlers }>
-        <Player style={{ left: this._x }}/>
+        <Player style={{ left: x }}/>
       </View>
     );
   }
