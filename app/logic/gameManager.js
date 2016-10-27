@@ -15,8 +15,13 @@ export default class GameManager {
   onEndHit(direction){}
 
   onSideHit(){}
+
+  flyingBall(){
+
+  }
   
   startGame(){
     this.levelCount = 1;
+    setTimout(() => this.flyingBall, 1000)
   }
 }
