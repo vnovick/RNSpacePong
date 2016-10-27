@@ -14,7 +14,7 @@ import {
   Dimensions
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
-import Player from './widgets/player';
+import PlayerPanel from './widgets/playerPanel';
 import { Loop, World, Stage } from 'react-game-kit/native';
 import {observer} from 'mobx-react/native';
 
@@ -35,13 +35,13 @@ class Board extends Component {
             </Text>
           </View>
           <Loop>
-              <Stage width={this.dimensions.width} height={this.dimensions.height - 200}>
-                <World>
-                  <Text style={{ position: 'absolute', bottom: 0}}>a</Text>
+              <Stage width={this.dimensions.width} height={this.dimensions.height - 50}>
+                <World height={this.dimensions.height - 200}>
+                  <View width={this.dimensions.width} height={this.dimensions.height - 150}>
+                    <Text style={{ position: 'absolute', bottom: 0, color: 'red'}}>the Ball</Text>
+                  </View>
+                  <PlayerPanel style={{ width: this.dimensions.width}}/>
                 </World>
-                <View style={{ backgroundColor: 'red', width: this.dimensions.width, height: 80}}>
-                  <Player/>
-                </View>
               </Stage>
           </Loop>
       </BackgroundScreen>
@@ -50,21 +50,14 @@ class Board extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start'
-  },
-  playerPanel: {
-    height: 80,
-  },
   welcomeContainer: {
-    height: 100
+    height: 50,
+    marginTop: 20
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     color: 'white',
-    margin: 10,
   },
   instructions: {
     textAlign: 'center',

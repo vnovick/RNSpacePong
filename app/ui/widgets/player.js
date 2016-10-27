@@ -17,18 +17,15 @@ export default function BackgroundScreen({ img, children, style }){
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    bottom: 0,
-    left: 0
+    top: 0,
   },
   player: {
     width: 50,
-    height: 50,
-    left: 150
+    height: 50
   },
   shield: {
     width: 50,
     height: 5,
-    left: 150,
     marginBottom: 5
   }
 });
