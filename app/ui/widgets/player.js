@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
+  TouchableOpacity,
   Image
 } from 'react-native';
 
 
 export default class Player extends Component {
 
+  componentDidMount(){
+    this.props.gameManager.setInitialPosition();
+  }
 
   render(){
     return (
-      <View style={[styles.container, { left: this.props.x }]} ref={(b) => this.player = b}>
-        <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }/>
-        <Image source={ require('../../assets/imgs/player.png')} style={[styles.player]} />
-      </View>
+        <View style={{ left: this.props.x }} ref={(b) => this.player = b}>
+          <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }/>
+          <Image source={ require('../../assets/imgs/player.png')} style={[styles.player]} />
+        </View>
     );
   }
 }

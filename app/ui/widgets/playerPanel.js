@@ -27,6 +27,11 @@ export default class PlayerPanel extends Component {
         // what is happening!
 
         // gestureState.{x,y}0 will be set to zero now
+        this._previousLeft = this._previousLeft || this.props.gameManager.player.pane.x;
+        if (this.props.gameManager.gameState.idle){
+          this.fireBall();
+        }
+
       },
       onPanResponderMove: (evt, gestureState) => {
         // The most recent move distance is gestureState.move{X,Y}
@@ -34,7 +39,7 @@ export default class PlayerPanel extends Component {
         // The accumulated gesture distance since becoming responder is
         // gestureState.d{x,y}
         let newX = this._previousLeft + gestureState.dx;
-        const { width: maxWidth } = this.props.style;
+        const { width: maxWidth } = this.props;
         newX =
           this._previousLeft + gestureState.dx < 0 ?
             0 :
@@ -62,14 +67,16 @@ export default class PlayerPanel extends Component {
     });
   }
 
-  _previousLeft = 0;
+  fireBall(){
+    this.props.gameManager.fireBall(1, 1);
+  }
+
 
   render(){
     const { player: { pane: { x } } } = this.props.gameManager;
-    console.log(this.props.gameManager.shieldCoordinatesRange);
     return (
       <View style={[styles.container, { width: this.props.width }]} { ...this._panResponder.panHandlers }>
-        <Player x={x}/>
+        <Player x={x} {...this.props }/>
       </View>
     );
   }

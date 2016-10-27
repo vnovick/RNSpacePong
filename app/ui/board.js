@@ -24,26 +24,35 @@ class Board extends Component {
   }
 
   componentDidMount(){
-    this.props.gameManager.setColliders()
+    // this.props.gameManager.setColliderFrame()
   }
 
   render() {
-    const { levelCount, dimensions: { width: screenWidth, height: screenHeight } } = this.props.gameManager;
+    const { levelCount, gameState: { over: gameOver, score, lives }, dimensions: { width: screenWidth, height: screenHeight } } = this.props.gameManager;
     return (
       <BackgroundScreen>
+        { gameOver ?
+          <View style={{ position: 'absolute', width: screenWidth, height: screenHeight }}>
+            <Text style={{ color: 'white', fontSize: 40 }}>Game Over</Text>
+          </View> : false
+        }
           <View style={styles.welcomeContainer}>
             <Text style={styles.welcome}>
               {` Welcome to Level ${levelCount} `}
             </Text>
           </View>
           <View>
-              <View width={screenWidth} height={screenHeight - 50}>
-                <View width={screenWidth} height={screenHeight - 150}>
+              <View width={screenWidth} height={screenHeight}>
+                <View width={screenWidth} height={screenHeight - 50}>
 
                 </View>
                 <Ball { ...this.props }/>
                 <PlayerPanel width={screenWidth} {...this.props} />
               </View>
+          </View>
+          <View style={ [styles.uiLayer, { width: screenWidth }] }>
+            <Text style={ styles.uiPanel }>{`score: ${score}`}</Text>
+            <Text style={ styles.uiPanel }>{`lives: ${lives}`}</Text>
           </View>
       </BackgroundScreen>
     );
@@ -65,6 +74,18 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  uiLayer: {
+    position: 'absolute',
+    bottom: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  uiPanel: {
+    width: 50,
+    color: 'white',
+    fontSize: 20,
+  }
 });
 
 export default observer(['gameManager'])(Board)
