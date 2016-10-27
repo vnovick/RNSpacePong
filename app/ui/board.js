@@ -13,7 +13,8 @@ import {
   View
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
-
+import PlayerPanel from './widgets/playerPanel';
+import World from './widgets/world';
 import {observer} from 'mobx-react/native';
 
 class Board extends Component {
@@ -26,15 +27,28 @@ class Board extends Component {
     const { levelCount } = this.props.gameManager;
     return (
       <BackgroundScreen>
-        <Text style={styles.welcome}>
-          {` Welcome to Level ${levelCount} `}
-        </Text>
+        <View style={styles.container}>
+          <View>
+            <Text style={styles.welcome}>
+              {` Welcome to Level ${levelCount} `}
+            </Text>
+          </View>
+          <World/>
+          <PlayerPanel style={ styles.playerPanel }/>
+        </View>
       </BackgroundScreen>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  playerPanel: {
+    height: 80,
+  },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
