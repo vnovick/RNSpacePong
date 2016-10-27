@@ -15,6 +15,11 @@ export default function BackgroundScreen({ img, children, style }){
 }
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0
+  },
   player: {
     width: 50,
     height: 50,

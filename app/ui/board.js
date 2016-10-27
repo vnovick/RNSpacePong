@@ -10,37 +10,40 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
-import PlayerPanel from './widgets/playerPanel';
+import Player from './widgets/player';
 import { Loop, World, Stage } from 'react-game-kit/native';
 import {observer} from 'mobx-react/native';
 
 class Board extends Component {
 
-  componentDidMount(){
-
+  constructor(){
+    super();
+    this.dimensions = Dimensions.get('window');
   }
 
   render() {
     const { levelCount } = this.props.gameManager;
     return (
       <BackgroundScreen>
-        <View style={styles.container}>
-          <View>
+          <View style={styles.welcomeContainer}>
             <Text style={styles.welcome}>
               {` Welcome to Level ${levelCount} `}
             </Text>
           </View>
           <Loop>
-            <Stage>
-              <World>
-                <PlayerPanel style={ styles.playerPanel }/>
-              </World>
-            </Stage>
+              <Stage width={this.dimensions.width} height={this.dimensions.height - 200}>
+                <World>
+                  <Text style={{ position: 'absolute', bottom: 0}}>a</Text>
+                </World>
+                <View style={{ backgroundColor: 'red', width: this.dimensions.width, height: 80}}>
+                  <Player/>
+                </View>
+              </Stage>
           </Loop>
-        </View>
       </BackgroundScreen>
     );
   }
@@ -49,10 +52,13 @@ class Board extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   },
   playerPanel: {
     height: 80,
+  },
+  welcomeContainer: {
+    height: 100
   },
   welcome: {
     fontSize: 20,
