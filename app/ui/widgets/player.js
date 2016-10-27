@@ -4,22 +4,22 @@ import {
   StyleSheet,
   Image
 } from 'react-native';
-import { Body } from 'react-game-kit';
 
-export default function BackgroundScreen({ img, children, style }){
-  return (
-    <View style={[styles.container, style]}>
-      <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }/>
-      <Image source={img || require('../../assets/imgs/player.png')} style={[styles.player]} />
-    </View>
-  );
+
+export default class Player extends Component {
+
+
+  render(){
+    return (
+      <View style={[styles.container, { left: this.props.x }]} ref={(b) => this.player = b}>
+        <Image source={ require('../../assets/imgs/shield_texture.jpeg')} style={ styles.shield }/>
+        <Image source={ require('../../assets/imgs/player.png')} style={[styles.player]} />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 0,
-  },
   player: {
     width: 50,
     height: 50

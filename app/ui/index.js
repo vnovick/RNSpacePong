@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   Navigator,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import GameManager from '../logic/gameManager';
@@ -17,9 +18,10 @@ const routes = {
 
 export default class Index extends Component {
 
+
   constructor(){
     super();
-    this.gameManager = new GameManager();
+    this.gameManager = new GameManager(Dimensions.get('window'));
   }
 
   renderScene({ id }, navigator){

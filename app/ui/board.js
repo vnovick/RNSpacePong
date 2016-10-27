@@ -10,23 +10,25 @@ import {
   StyleSheet,
   Text,
   ScrollView,
-  View,
-  Dimensions
+  View
 } from 'react-native';
 import BackgroundScreen from './widgets/background';
 import PlayerPanel from './widgets/playerPanel';
-import { Loop, World, Stage } from 'react-game-kit/native';
+import Ball from './widgets/ball';
 import {observer} from 'mobx-react/native';
 
 class Board extends Component {
 
   constructor(){
     super();
-    this.dimensions = Dimensions.get('window');
+  }
+
+  componentDidMount(){
+    this.props.gameManager.setColliders()
   }
 
   render() {
-    const { levelCount } = this.props.gameManager;
+    const { levelCount, dimensions: { width: screenWidth, height: screenHeight } } = this.props.gameManager;
     return (
       <BackgroundScreen>
           <View style={styles.welcomeContainer}>
@@ -34,16 +36,15 @@ class Board extends Component {
               {` Welcome to Level ${levelCount} `}
             </Text>
           </View>
-          <Loop>
-              <Stage width={this.dimensions.width} height={this.dimensions.height - 50}>
-                <World height={this.dimensions.height - 200}>
-                  <View width={this.dimensions.width} height={this.dimensions.height - 150}>
-                    <Text style={{ position: 'absolute', bottom: 0, color: 'red'}}>the Ball</Text>
-                  </View>
-                  <PlayerPanel style={{ width: this.dimensions.width}} {...this.props} />
-                </World>
-              </Stage>
-          </Loop>
+          <View>
+              <View width={screenWidth} height={screenHeight - 50}>
+                <View width={screenWidth} height={screenHeight - 150}>
+
+                </View>
+                <Ball { ...this.props }/>
+                <PlayerPanel width={screenWidth} {...this.props} />
+              </View>
+          </View>
       </BackgroundScreen>
     );
   }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   View,
   StyleSheet,
@@ -12,6 +12,8 @@ import Player from './player'
 
 @observer(['gameManager'])
 export default class PlayerPanel extends Component {
+
+
   componentWillMount() {
     this._panResponder = PanResponder.create({
       // Ask to be the responder:
@@ -36,8 +38,8 @@ export default class PlayerPanel extends Component {
         newX =
           this._previousLeft + gestureState.dx < 0 ?
             0 :
-            newX > maxWidth ?
-              maxWidth :
+            newX > maxWidth - 50 ?
+              maxWidth - 50 :
                 newX;
         this.props.gameManager.movePlayer(newX)
       },
@@ -64,9 +66,10 @@ export default class PlayerPanel extends Component {
 
   render(){
     const { player: { pane: { x } } } = this.props.gameManager;
+    console.log(this.props.gameManager.shieldCoordinatesRange);
     return (
-      <View style={[styles.container, this.props.style]} { ...this._panResponder.panHandlers }>
-        <Player style={{ left: x }}/>
+      <View style={[styles.container, { width: this.props.width }]} { ...this._panResponder.panHandlers }>
+        <Player x={x}/>
       </View>
     );
   }
