@@ -1,15 +1,11 @@
-import { extendObservable, action, autorun } from 'mobx';
+import { observable, action } from 'mobx';
 
 export default class GameManager {
 
-  constructor(){
-    extendObservable(this, {
-      levelCount: 0,
-    });
+  @observable
+  levelCount = 0;
 
-    this.startGame = action(this.startGame);
-  }
-
+  @action
   startGame(){
     this.levelCount = 1;
   }
