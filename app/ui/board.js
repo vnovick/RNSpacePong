@@ -15,6 +15,7 @@ import {
 import BackgroundScreen from './widgets/background';
 import PlayerPanel from './widgets/playerPanel';
 import Ball from './widgets/ball';
+import Level from './level';
 import {observer} from 'mobx-react/native';
 
 class Board extends Component {
@@ -32,7 +33,7 @@ class Board extends Component {
     return (
       <BackgroundScreen>
         { gameOver ?
-          <View style={{ position: 'absolute', width: screenWidth, height: screenHeight }}>
+          <View style={{ position: 'absolute', width: screenWidth, height: screenHeight, flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text style={{ color: 'white', fontSize: 40 }}>Game Over</Text>
           </View> : false
         }
@@ -43,9 +44,7 @@ class Board extends Component {
           </View>
           <View>
               <View width={screenWidth} height={screenHeight}>
-                <View width={screenWidth} height={screenHeight - 50}>
-
-                </View>
+                <Level width={screenWidth} height={screenHeight - 50} gameManager={this.props.gameManager}/>
                 <Ball { ...this.props }/>
                 <PlayerPanel width={screenWidth} {...this.props} />
               </View>
